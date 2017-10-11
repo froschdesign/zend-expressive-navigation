@@ -1,0 +1,68 @@
+{
+    "name": "zendframework/zend-expressive-navigation",
+    "description": "Page, middleware and factories for navigations in a zend-expressive application",
+    "homepage": "https://docs.zendframework.com/zend-expressive-navigation/",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zend",
+        "zendframework",
+        "zend-expressive-navigation",
+        "zend-expressive"
+    ],
+    "support": {
+        "docs": "https://docs.zendframework.com/zend-navigation/",
+        "issues": "https://github.com/zendframework/zend-expressive-navigation/issues",
+        "source": "https://github.com/zendframework/zend-expressive-navigation",
+        "rss": "https://github.com/zendframework/zend-expressive-navigation/releases.atom",
+        "slack": "https://zendframework-slack.herokuapp.com",
+        "forum": "https://discourse.zendframework.com/c/questions/expressive"
+    },
+    "require": {
+        "php": "^7.0",
+        "http-interop/http-middleware": "0.4.1",
+        "zendframework/zend-expressive-helpers": "^4.2",
+        "zendframework/zend-navigation": "^2.8.2",
+        "zendframework/zend-stdlib": "^3.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4.1",
+        "zendframework/zend-coding-standard": "~1.0.0",
+        "zendframework/zend-config": "^3.1",
+        "zendframework/zend-expressive-zendrouter": "^2.0.1",
+        "zendframework/zend-servicemanager": "^3.3"
+    },
+    "suggest": {
+        "zendframework/zend-config": "^3.1, to provide page configuration (optional, as arrays and Traversables are also allowed)",
+        "zendframework/zend-view": "^2.9, to use the navigation view helpers"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zend\\Expressive\\Navigation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZendTest\\Expressive\\Navigation\\": "test/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev",
+            "dev-develop": "1.1-dev"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
+    }
+}

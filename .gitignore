@@ -1,0 +1,17 @@
+.buildpath
+.DS_Store
+.idea
+.phpcd/
+.project
+.settings/
+.*.sw*
+.*.un~
+nbproject
+tmp/
+doc/html/
+zf-mkdoc-theme/
+
+clover.xml
+coveralls-upload.json
+phpunit.xml
+vendor
