@@ -37,8 +37,11 @@ class ExpressivePageTest extends TestCase
 
     protected function setUp()
     {
+        // Create middleware double
+        $middleware = $this->prophesize(MiddlewareInterface::class)->reveal();
+
         // Create URL helper
-        $this->route = new Route('/foo', 'foo', ['GET'], 'foo');
+        $this->route = new Route('/foo', $middleware, ['GET'], 'foo');
         $router      = new ZendRouter();
         $router->addRoute($this->route);
         $this->urlHelper = new UrlHelper($router);
@@ -131,7 +134,7 @@ class ExpressivePageTest extends TestCase
     {
         $this->expectException(UrlHelperRuntimeException::class);
 
-        $failedResultSet = RouteResult::fromRouteFailure();
+        $failedResultSet = RouteResult::fromRouteFailure(null);
         $page            = new ExpressivePage(
             [
                 'url_helper'   => $this->urlHelper,
