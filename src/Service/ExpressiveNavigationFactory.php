@@ -34,7 +34,7 @@ class ExpressiveNavigationFactory extends AbstractExpressiveNavigationFactory
      * @return array
      * @throws Exception\InvalidArgumentException
      */
-    private function getPages(ContainerInterface $container)
+    private function getPages(ContainerInterface $container) : array
     {
         // Is already created?
         if (null !== $this->pages) {

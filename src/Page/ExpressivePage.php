@@ -51,7 +51,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @inheritDoc
      */
-    public function isActive($recursive = false)
+    public function isActive($recursive = false) : bool
     {
         if ($this->active
             || $this->routeName === null
@@ -68,7 +68,7 @@ class ExpressivePage extends AbstractPage
         $matchedRouteName = $this->routeResult->getMatchedRouteName();
 
         if ($matchedRouteName === $this->routeName
-            && count($intersectionOfParams) === count($this->routeParams)
+            && \count($intersectionOfParams) === \count($this->routeParams)
         ) {
             $this->active = true;
 
@@ -81,7 +81,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @inheritDoc
      */
-    public function getHref()
+    public function getHref() : string
     {
         // User cache?
         if ($this->hrefCache) {
@@ -103,9 +103,9 @@ class ExpressivePage extends AbstractPage
     /**
      * @param string|null $route
      */
-    public function setRoute($route)
+    public function setRoute(?string $route) : void
     {
-        if (null !== $route && (! is_string($route) || empty($route))) {
+        if ($route === '') {
             throw new Exception\InvalidArgumentException(
                 'Invalid argument: $route must be a non-empty string or null'
             );
@@ -118,7 +118,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @return string
      */
-    public function getRoute()
+    public function getRoute() : ?string
     {
         return $this->routeName;
     }
@@ -126,7 +126,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @param array|null $params
      */
-    public function setParams(array $params = null)
+    public function setParams(array $params = null) : void
     {
         $this->routeParams = $params ? : [];
         $this->hrefCache   = null;
@@ -135,7 +135,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @return array
      */
-    public function getParams()
+    public function getParams() : array
     {
         return $this->routeParams;
     }
@@ -143,7 +143,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @param array|null $query
      */
-    public function setQuery(array $query = null)
+    public function setQuery(array $query = null) : void
     {
         $this->queryParams = $query ? : [];
         $this->hrefCache   = null;
@@ -152,7 +152,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @return array
      */
-    public function getQuery()
+    public function getQuery() : array
     {
         return $this->queryParams;
     }
@@ -160,15 +160,15 @@ class ExpressivePage extends AbstractPage
     /**
      * @param RouteResult $routeResult
      */
-    public function setRouteResult(RouteResult $routeResult)
+    public function setRouteResult(RouteResult $routeResult) : void
     {
         $this->routeResult = $routeResult;
     }
 
     /**
-     * @return RouteResult
+     * @return RouteResult|null
      */
-    public function getRouteResult()
+    public function getRouteResult() : ?RouteResult
     {
         return $this->routeResult;
     }
@@ -176,7 +176,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @return UrlHelper
      */
-    public function getUrlHelper()
+    public function getUrlHelper() : ?UrlHelper
     {
         return $this->urlHelper;
     }
@@ -184,7 +184,7 @@ class ExpressivePage extends AbstractPage
     /**
      * @param UrlHelper $urlHelper
      */
-    public function setUrlHelper(UrlHelper $urlHelper)
+    public function setUrlHelper(UrlHelper $urlHelper) : void
     {
         $this->urlHelper = $urlHelper;
     }

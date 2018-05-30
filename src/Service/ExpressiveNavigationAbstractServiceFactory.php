@@ -49,8 +49,10 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      *                                          Zend\Navigation\
      * @return bool
      */
-    public function canCreate(ContainerInterface $container, $requestedName)
-    {
+    public function canCreate(
+        ContainerInterface $container,
+        $requestedName
+    ) : bool {
         $requestedName = $this->normalizeRequestedName($requestedName);
 
         if (0 !== strpos($requestedName, self::SERVICE_PREFIX)) {
@@ -107,7 +109,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      * @param string $requestedName
      * @return string
      */
-    private function normalizeRequestedName($requestedName)
+    private function normalizeRequestedName(string $requestedName) : string
     {
         if ($requestedName === Navigation::class) {
             $requestedName = 'Zend\Navigation\Default';
@@ -122,7 +124,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      * @param  ContainerInterface $container
      * @return array
      */
-    private function getConfig(ContainerInterface $container)
+    private function getConfig(ContainerInterface $container) : array
     {
         if ($this->config !== null) {
             return $this->config;
@@ -135,7 +137,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
 
         $config = $container->get('config');
         if (! isset($config[self::CONFIG_KEY])
-            || ! is_array($config[self::CONFIG_KEY])
+            || ! \is_array($config[self::CONFIG_KEY])
         ) {
             $this->config = [];
             return $this->config;
@@ -151,9 +153,9 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      * @param string $name
      * @return string
      */
-    private function getConfigName($name)
+    private function getConfigName(string $name) : string
     {
-        return substr($name, strlen(self::SERVICE_PREFIX));
+        return substr($name, \strlen(self::SERVICE_PREFIX));
     }
 
     /**
@@ -163,7 +165,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      * @param array|\ArrayAccess $config
      * @return bool
      */
-    private function hasNamedConfig($name, $config)
+    private function hasNamedConfig(string $name, $config) : bool
     {
         $withoutPrefix = $this->getConfigName($name);
 
@@ -185,7 +187,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      * @param array|\ArrayAccess $config
      * @return array
      */
-    private function getNamedConfig($name, $config)
+    private function getNamedConfig(string $name, $config) : array
     {
         $withoutPrefix = $this->getConfigName($name);
 

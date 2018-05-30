@@ -22,8 +22,10 @@ abstract class AbstractExpressiveNavigationFactory
      * @param array              $pages
      * @return array
      */
-    protected function preparePages(ContainerInterface $container, array $pages)
-    {
+    protected function preparePages(
+        ContainerInterface $container,
+        array $pages
+    ) : array {
         // Get URL helper
         /** @var UrlHelper $urlHelper */
         $urlHelper = $container->get(UrlHelper::class);
@@ -39,7 +41,7 @@ abstract class AbstractExpressiveNavigationFactory
     protected function injectComponents(
         array $pages,
         UrlHelper $urlHelper = null
-    ) {
+    ) : array {
         foreach ($pages as &$page) {
             if (isset($page['route'])) {
                 // Set Expressive page as page type
@@ -69,7 +71,7 @@ abstract class AbstractExpressiveNavigationFactory
      */
     protected function getPagesFromConfig($config = null)
     {
-        if (is_string($config)) {
+        if (\is_string($config)) {
             if (! file_exists($config)) {
                 throw new Exception\InvalidArgumentException(
                     sprintf(
@@ -81,7 +83,7 @@ abstract class AbstractExpressiveNavigationFactory
             $config = Config\Factory::fromFile($config);
         } elseif ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
-        } elseif (! is_array($config)) {
+        } elseif (! \is_array($config)) {
             throw new Exception\InvalidArgumentException(
                 'Invalid input, expected array, filename, or Traversable object'
             );

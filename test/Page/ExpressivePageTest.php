@@ -123,7 +123,7 @@ class ExpressivePageTest extends TestCase
                 'route_result' => $this->routeResult,
             ]
         );
-        
+
         // Set base path
         $this->urlHelper->setBasePath('bar');
 
@@ -220,33 +220,12 @@ class ExpressivePageTest extends TestCase
         $this->assertNull($page->getRoute());
     }
 
-    /**
-     * @dataProvider invalidArgumentProvider
-     *
-     * @param $value
-     */
-    public function testInvalidArgumentForRouteShouldThrowException($value)
+    public function testInvalidArgumentForRouteShouldThrowException()
     {
         $this->expectException(InvalidArgumentException::class);
 
         $page = new ExpressivePage();
-        $page->setRoute($value);
-    }
-
-    /**
-     * Data provider
-     *
-     * @return array
-     */
-    public function invalidArgumentProvider() : array
-    {
-        return [
-            [''],
-            [new \stdClass()],
-            [1],
-            [1.0],
-            [[]],
-        ];
+        $page->setRoute('');
     }
 
     public function testSetRouterPerConstructor()
