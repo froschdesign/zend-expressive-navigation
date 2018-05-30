@@ -8,6 +8,7 @@
 namespace ZendTest\Expressive\Navigation\Page;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Server\MiddlewareInterface;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Helper\Exception\RuntimeException as UrlHelperRuntimeException;
 use Zend\Expressive\Helper\UrlHelper;

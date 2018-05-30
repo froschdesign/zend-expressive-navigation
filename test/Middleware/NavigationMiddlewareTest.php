@@ -7,9 +7,10 @@
 
 namespace ZendTest\Expressive\Navigation\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Navigation\Middleware\NavigationMiddleware;
 use Zend\Expressive\Navigation\Page\ExpressivePage;
@@ -32,7 +33,9 @@ class NavigationMiddlewareTest extends TestCase
     {
         // Create navigation with one page
         $this->navigation = new Navigation([
-            new ExpressivePage(['route' => 'home']),
+            new ExpressivePage(['route' => 'foo']),
+            new ExpressivePage(['route' => 'bar']),
+            new ExpressivePage(['route' => 'baz']),
         ]);
 
         // Create middleware
@@ -53,18 +56,19 @@ class NavigationMiddlewareTest extends TestCase
         /** @var ServerRequestInterface $request */
         $request = $prophecy->reveal();
 
-        // Delegate test double
-        /** @var DelegateInterface $delegate */
-        $delegate = $this->prophesize(DelegateInterface::class)->reveal();
-        $this->middleware->process($request, $delegate);
+        // Response test double
+        /** @var ResponseInterface $response */
+        $response = $this->prophesize(ResponseInterface::class)->reveal();
 
-        // Get page
+        // Handler test double
+        $handler = $this->prophesize(RequestHandlerInterface::class);
+        $handler->handle($request)->willReturn($response);
+        $this->middleware->process($request, $handler->reveal());
+
+        // Test pages
         /** @var ExpressivePage $page */
-        $page = $this->navigation->findOneBy('route', 'home');
-        if ($page) {
+        foreach ($this->navigation as $page) {
             $this->assertEquals($routeResult, $page->getRouteResult());
-        } else {
-            $this->fail('Page not found!');
         }
     }
 
