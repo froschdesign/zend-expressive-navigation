@@ -6,5 +6,16 @@
 `zend-expressive-navigation` provides page, middleware and factories for 
 navigations in a zend-expressive application.
 
-- File issues at https://github.com/froschdesign/zend-expressive-navigation/issues
-- Documentation is at https://docs.zendframework.com/zend-navigation/
+## WORK IN PROGRESS
+
+This repository contains a work in progress project for building an authentication module for Expressive and PSR-7 applications.
+
+Please, do not use this code in a production environment!
+
+## Feature requests, problems and bugs
+
+Please use the issue tracker: https://github.com/froschdesign/zend-expressive-navigation/issues
+
+## Quickstart
+
+A _first_ quick start guide can be found in the issue tracker: https://github.com/froschdesign/zend-expressive-navigation/issues/2
