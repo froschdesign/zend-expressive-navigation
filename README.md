@@ -8,7 +8,7 @@ navigations in a zend-expressive application.
 
 ## WORK IN PROGRESS
 
-This repository contains a work in progress project for building an authentication module for Expressive and PSR-7 applications.
+This repository contains a work in progress project for building a navigation module for Expressive and PSR-7 applications.
 
 Please, do not use this code in a production environment!
 
