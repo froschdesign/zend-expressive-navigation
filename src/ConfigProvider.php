@@ -7,6 +7,7 @@
 
 namespace Zend\Expressive\Navigation;
 
+use Zend\Expressive\Navigation\Middleware;
 use Zend\Navigation\Navigation;
 
 class ConfigProvider
@@ -38,7 +39,8 @@ class ConfigProvider
                 'navigation' => Navigation::class,
             ],
             'factories'          => [
-                Navigation::class => Service\ExpressiveNavigationFactory::class,
+                Middleware\NavigationMiddleware::class => Middleware\NavigationMiddlewareFactory::class,
+                Navigation::class                      => Service\ExpressiveNavigationFactory::class,
             ],
         ];
     }
