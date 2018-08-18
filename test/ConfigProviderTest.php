@@ -8,6 +8,7 @@
 namespace ZendTest\Expressive\Navigation;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Expressive\Navigation\Middleware;
 use Zend\Expressive\Navigation\ConfigProvider;
 use Zend\Expressive\Navigation\Service;
 use Zend\Navigation\Navigation;
@@ -22,7 +23,8 @@ class ConfigProviderTest extends TestCase
             'navigation' => Navigation::class,
         ],
         'factories'          => [
-            Navigation::class => Service\ExpressiveNavigationFactory::class,
+            Middleware\NavigationMiddleware::class => Middleware\NavigationMiddlewareFactory::class,
+            Navigation::class                      => Service\ExpressiveNavigationFactory::class,
         ],
     ];
 
