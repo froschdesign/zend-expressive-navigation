@@ -42,16 +42,8 @@ class NavigationMiddlewareFactoryTest extends TestCase
         $prophecy->has('config')->willReturn(true);
         $prophecy->get('config')->willReturn([
             'navigation' => [
-                'default' => [
-                    [
-                        'route' => 'home',
-                    ],
-                ],
-                'special' => [
-                    [
-                        'route' => 'home',
-                    ],
-                ],
+                'default' => [],
+                'special' => [],
             ],
         ]);
         $prophecy->get('Zend\Navigation\Default')->willReturn(
@@ -78,11 +70,7 @@ class NavigationMiddlewareFactoryTest extends TestCase
         $prophecy->has('config')->willReturn(true);
         $prophecy->get('config')->willReturn([
             'navigation' => [
-                'default' => [
-                    [
-                        'route' => 'home',
-                    ],
-                ],
+                'default' => [],
             ],
         ]);
         $prophecy->get(Navigation::class)->willReturn(

@@ -33,9 +33,9 @@ class NavigationMiddlewareTest extends TestCase
     {
         // Create navigation with one page
         $this->navigation = new Navigation([
-            new ExpressivePage(['route' => 'foo']),
-            new ExpressivePage(['route' => 'bar']),
-            new ExpressivePage(['route' => 'baz']),
+            new ExpressivePage(),
+            new ExpressivePage(),
+            new ExpressivePage(),
         ]);
 
         // Create middleware
