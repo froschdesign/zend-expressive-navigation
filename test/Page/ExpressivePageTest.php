@@ -145,6 +145,19 @@ class ExpressivePageTest extends TestCase
         $page->getHref();
     }
 
+    public function testGetHrefWithRouteResultOnUrlHelperAndNotPageShouldGenerateHref()
+    {
+        $this->urlHelper->setRouteResult($this->routeResult);
+
+        $page = new ExpressivePage(
+            [
+                'url_helper' => $this->urlHelper,
+            ]
+        );
+
+        $this->assertSame('/foo', $page->getHref());
+    }
+
     public function testGetHrefSetsHrefCache()
     {
         $page = new ExpressivePage(
