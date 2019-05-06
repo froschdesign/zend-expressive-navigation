@@ -17,14 +17,14 @@ class NavigationMiddlewareFactory
      *
      * @var string
      */
-    const CONFIG_KEY = 'navigation';
+    public const CONFIG_KEY = 'navigation';
 
     /**
      * Service manager factory prefix
      *
      * @var string
      */
-    const SERVICE_PREFIX = 'Zend\\Navigation\\';
+    public const SERVICE_PREFIX = 'Zend\\Navigation\\';
 
     /**
      * @var array|null
