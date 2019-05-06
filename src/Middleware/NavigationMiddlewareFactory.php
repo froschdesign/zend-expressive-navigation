@@ -74,7 +74,7 @@ class NavigationMiddlewareFactory
 
         $names = array_keys($config[self::CONFIG_KEY]);
 
-        if (\count($names) === 1) {
+        if (\count($names) === 1 && current($names) === 'default') {
             $this->containerNames[] = Navigation::class;
             return $this->containerNames;
         }

@@ -9,8 +9,10 @@ namespace ZendTest\Expressive\Navigation\Middleware;
 
 use PHPUnit\Framework\TestCase;
 use Interop\Container\ContainerInterface;
+use ReflectionObject;
 use Zend\Expressive\Navigation\Middleware\NavigationMiddleware;
 use Zend\Expressive\Navigation\Middleware\NavigationMiddlewareFactory;
+use Zend\Expressive\Navigation\Page\ExpressivePage;
 use Zend\Navigation\Navigation;
 
 class NavigationMiddlewareFactoryTest extends TestCase
@@ -84,6 +86,42 @@ class NavigationMiddlewareFactoryTest extends TestCase
             NavigationMiddleware::class,
             $factory($container)
         );
+    }
+
+    public function testFactoryWithOneNavigationAndCustomNavigationName()
+    {
+        // Add page
+        $this->navigation->addPage(
+            new ExpressivePage(['route' => 'home'])
+        );
+
+        // Create test double for container
+        /** @var ContainerInterface|\Prophecy\Prophecy\ObjectProphecy $prophecy */
+        $prophecy = $this->prophesize(ContainerInterface::class);
+        $prophecy->has('config')->willReturn(true);
+        $prophecy->get('config')->willReturn([
+            'navigation' => [
+                'special' => [],
+            ],
+        ]);
+        $prophecy->get('Zend\Navigation\Special')->willReturn(
+            $this->navigation
+        );
+        /** @var ContainerInterface $container */
+        $container = $prophecy->reveal();
+
+        // Test middleware
+        $factory = $this->factory;
+        $middleware = $factory($container);
+        $this->assertInstanceOf(NavigationMiddleware::class, $middleware);
+
+        $reflection = new ReflectionObject($middleware);
+        $property = $reflection->getProperty('containers');
+        $property->setAccessible(true);
+        /** @var array $containers */
+        $containers = $property->getValue($middleware);
+
+        $this->assertSame($this->navigation, array_shift($containers));
     }
 
     public function testFactoryWithoutConfigShouldReturnMiddleware()
