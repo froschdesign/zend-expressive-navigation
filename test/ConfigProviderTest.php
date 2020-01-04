@@ -1,30 +1,30 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Navigation;
+namespace MezzioTest\Navigation;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Expressive\Navigation\Middleware;
-use Zend\Expressive\Navigation\ConfigProvider;
-use Zend\Expressive\Navigation\Service;
-use Zend\Navigation\Navigation;
+use Mezzio\Navigation\Middleware;
+use Mezzio\Navigation\ConfigProvider;
+use Mezzio\Navigation\Service;
+use Laminas\Navigation\Navigation;
 
 class ConfigProviderTest extends TestCase
 {
     private $config = [
         'abstract_factories' => [
-            Service\ExpressiveNavigationAbstractServiceFactory::class,
+            Service\MezzioNavigationAbstractServiceFactory::class,
         ],
         'aliases'            => [
             'navigation' => Navigation::class,
         ],
         'factories'          => [
             Middleware\NavigationMiddleware::class => Middleware\NavigationMiddlewareFactory::class,
-            Navigation::class                      => Service\ExpressiveNavigationFactory::class,
+            Navigation::class                      => Service\MezzioNavigationFactory::class,
         ],
     ];
 

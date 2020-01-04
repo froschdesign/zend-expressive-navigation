@@ -1,19 +1,19 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Navigation\Middleware;
+namespace MezzioTest\Navigation\Middleware;
 
 use PHPUnit\Framework\TestCase;
 use Interop\Container\ContainerInterface;
 use ReflectionObject;
-use Zend\Expressive\Navigation\Middleware\NavigationMiddleware;
-use Zend\Expressive\Navigation\Middleware\NavigationMiddlewareFactory;
-use Zend\Expressive\Navigation\Page\ExpressivePage;
-use Zend\Navigation\Navigation;
+use Mezzio\Navigation\Middleware\NavigationMiddleware;
+use Mezzio\Navigation\Middleware\NavigationMiddlewareFactory;
+use Mezzio\Navigation\Page\MezzioPage;
+use Laminas\Navigation\Navigation;
 
 class NavigationMiddlewareFactoryTest extends TestCase
 {
@@ -48,10 +48,10 @@ class NavigationMiddlewareFactoryTest extends TestCase
                 'special' => [],
             ],
         ]);
-        $prophecy->get('Zend\Navigation\Default')->willReturn(
+        $prophecy->get('Laminas\Navigation\Default')->willReturn(
             $this->navigation
         );
-        $prophecy->get('Zend\Navigation\Special')->willReturn(
+        $prophecy->get('Laminas\Navigation\Special')->willReturn(
             $this->navigation
         );
         /** @var ContainerInterface $container */
@@ -92,7 +92,7 @@ class NavigationMiddlewareFactoryTest extends TestCase
     {
         // Add page
         $this->navigation->addPage(
-            new ExpressivePage(['route' => 'home'])
+            new MezzioPage(['route' => 'home'])
         );
 
         // Create test double for container
@@ -104,7 +104,7 @@ class NavigationMiddlewareFactoryTest extends TestCase
                 'special' => [],
             ],
         ]);
-        $prophecy->get('Zend\Navigation\Special')->willReturn(
+        $prophecy->get('Laminas\Navigation\Special')->willReturn(
             $this->navigation
         );
         /** @var ContainerInterface $container */

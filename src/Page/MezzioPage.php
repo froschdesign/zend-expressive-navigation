@@ -1,18 +1,18 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Navigation\Page;
+namespace Mezzio\Navigation\Page;
 
-use Zend\Expressive\Helper\UrlHelper;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Navigation\Exception;
-use Zend\Navigation\Page\AbstractPage;
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Router\RouteResult;
+use Laminas\Navigation\Exception;
+use Laminas\Navigation\Page\AbstractPage;
 
-class ExpressivePage extends AbstractPage
+class MezzioPage extends AbstractPage
 {
     /**
      * Route name

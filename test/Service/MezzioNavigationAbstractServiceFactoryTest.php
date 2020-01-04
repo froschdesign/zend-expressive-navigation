@@ -1,23 +1,23 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Navigation\Service;
+namespace MezzioTest\Navigation\Service;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
-use Zend\Expressive\Helper\UrlHelper;
-use Zend\Expressive\Navigation\Service\ExpressiveNavigationAbstractServiceFactory;
-use Zend\Expressive\Router\ZendRouter;
-use Zend\Navigation\Navigation;
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Navigation\Service\MezzioNavigationAbstractServiceFactory;
+use Mezzio\Router\LaminasRouter;
+use Laminas\Navigation\Navigation;
 
-class ExpressiveNavigationAbstractServiceFactoryTest extends TestCase
+class MezzioNavigationAbstractServiceFactoryTest extends TestCase
 {
     /**
-     * @var ExpressiveNavigationAbstractServiceFactory
+     * @var MezzioNavigationAbstractServiceFactory
      */
     private $factory;
 
@@ -29,7 +29,7 @@ class ExpressiveNavigationAbstractServiceFactoryTest extends TestCase
     protected function setUp()
     {
         // Create factory
-        $this->factory = new ExpressiveNavigationAbstractServiceFactory();
+        $this->factory = new MezzioNavigationAbstractServiceFactory();
 
         // Create test double for container
         /** @var ContainerInterface|\Prophecy\Prophecy\ObjectProphecy $prophecy */
@@ -47,7 +47,7 @@ class ExpressiveNavigationAbstractServiceFactoryTest extends TestCase
             ]
         );
         $prophecy->get(UrlHelper::class)->willReturn(
-            new UrlHelper(new ZendRouter())
+            new UrlHelper(new LaminasRouter())
         );
         $this->container = $prophecy->reveal();
     }
@@ -83,7 +83,7 @@ class ExpressiveNavigationAbstractServiceFactoryTest extends TestCase
         $prophecy->has('config')->willReturn(true);
         $prophecy->get('config')->willReturn([]);
         $prophecy->get(UrlHelper::class)->willReturn(
-            new UrlHelper(new ZendRouter())
+            new UrlHelper(new LaminasRouter())
         );
         /** @var ContainerInterface $container */
         $container = $prophecy->reveal();

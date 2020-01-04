@@ -1,19 +1,19 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Navigation;
+namespace Mezzio\Navigation;
 
-use Zend\Expressive\Navigation\Middleware;
-use Zend\Navigation\Navigation;
+use Mezzio\Navigation\Middleware;
+use Laminas\Navigation\Navigation;
 
 class ConfigProvider
 {
     /**
-     * Return general-purpose zend-navigation configuration.
+     * Return general-purpose mezzio-navigation configuration.
      *
      * @return array
      */
@@ -33,14 +33,14 @@ class ConfigProvider
     {
         return [
             'abstract_factories' => [
-                Service\ExpressiveNavigationAbstractServiceFactory::class,
+                Service\MezzioNavigationAbstractServiceFactory::class,
             ],
             'aliases'            => [
                 'navigation' => Navigation::class,
             ],
             'factories'          => [
                 Middleware\NavigationMiddleware::class => Middleware\NavigationMiddlewareFactory::class,
-                Navigation::class                      => Service\ExpressiveNavigationFactory::class,
+                Navigation::class                      => Service\MezzioNavigationFactory::class,
             ],
         ];
     }

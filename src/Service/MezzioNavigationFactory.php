@@ -1,17 +1,17 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Navigation\Service;
+namespace Mezzio\Navigation\Service;
 
 use Psr\Container\ContainerInterface;
-use Zend\Navigation\Exception;
-use Zend\Navigation\Navigation;
+use Laminas\Navigation\Exception;
+use Laminas\Navigation\Navigation;
 
-class ExpressiveNavigationFactory extends AbstractExpressiveNavigationFactory
+class MezzioNavigationFactory extends AbstractMezzioNavigationFactory
 {
     /**
      * @var array|null
