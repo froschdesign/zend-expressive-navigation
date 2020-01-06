@@ -1,21 +1,21 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Navigation\Middleware;
+namespace MezzioTest\Navigation\Middleware;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Expressive\Navigation\Middleware\NavigationMiddleware;
-use Zend\Expressive\Navigation\Page\ExpressivePage;
-use Zend\Navigation\Exception\InvalidArgumentException;
-use Zend\Navigation\Navigation;
+use Mezzio\Router\RouteResult;
+use Mezzio\Navigation\Middleware\NavigationMiddleware;
+use Mezzio\Navigation\Page\MezzioPage;
+use Laminas\Navigation\Exception\InvalidArgumentException;
+use Laminas\Navigation\Navigation;
 
 class NavigationMiddlewareTest extends TestCase
 {
@@ -33,9 +33,9 @@ class NavigationMiddlewareTest extends TestCase
     {
         // Create navigation with one page
         $this->navigation = new Navigation([
-            new ExpressivePage(),
-            new ExpressivePage(),
-            new ExpressivePage(),
+            new MezzioPage(),
+            new MezzioPage(),
+            new MezzioPage(),
         ]);
 
         // Create middleware
@@ -66,7 +66,7 @@ class NavigationMiddlewareTest extends TestCase
         $this->middleware->process($request, $handler->reveal());
 
         // Test pages
-        /** @var ExpressivePage $page */
+        /** @var MezzioPage $page */
         foreach ($this->navigation as $page) {
             $this->assertEquals($routeResult, $page->getRouteResult());
         }

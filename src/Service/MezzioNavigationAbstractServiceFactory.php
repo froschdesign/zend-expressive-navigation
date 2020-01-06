@@ -1,17 +1,17 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Navigation\Service;
+namespace Mezzio\Navigation\Service;
 
 use Interop\Container\ContainerInterface;
-use Zend\Navigation\Navigation;
-use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Laminas\Navigation\Navigation;
+use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 
-final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiveNavigationFactory implements
+final class MezzioNavigationAbstractServiceFactory extends AbstractMezzioNavigationFactory implements
     AbstractFactoryInterface
 {
     /**
@@ -26,7 +26,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      *
      * @var string
      */
-    const SERVICE_PREFIX = 'Zend\\Navigation\\';
+    const SERVICE_PREFIX = 'Laminas\\Navigation\\';
 
     /**
      * Navigation configuration
@@ -46,7 +46,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
      * @param ContainerInterface $container
      * @param string             $requestedName Name by which service was
      *                                          requested, must start with
-     *                                          Zend\Navigation\
+     *                                          Laminas\Navigation\
      * @return bool
      */
     public function canCreate(
@@ -112,7 +112,7 @@ final class ExpressiveNavigationAbstractServiceFactory extends AbstractExpressiv
     private function normalizeRequestedName(string $requestedName) : string
     {
         if ($requestedName === Navigation::class) {
-            $requestedName = 'Zend\Navigation\Default';
+            $requestedName = 'Laminas\Navigation\Default';
         }
 
         return $requestedName;

@@ -1,21 +1,21 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Navigation\Service;
+namespace Mezzio\Navigation\Service;
 
 use Psr\Container\ContainerInterface;
 use Traversable;
-use Zend\Config;
-use Zend\Expressive\Helper\UrlHelper;
-use Zend\Expressive\Navigation\Page\ExpressivePage;
-use Zend\Navigation\Exception;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Config;
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Navigation\Page\MezzioPage;
+use Laminas\Navigation\Exception;
+use Laminas\Stdlib\ArrayUtils;
 
-abstract class AbstractExpressiveNavigationFactory
+abstract class AbstractMezzioNavigationFactory
 {
     /**
      * @param ContainerInterface $container
@@ -44,8 +44,8 @@ abstract class AbstractExpressiveNavigationFactory
     ) : array {
         foreach ($pages as &$page) {
             if (isset($page['route'])) {
-                // Set Expressive page as page type
-                $page['type'] = ExpressivePage::class;
+                // Set Mezzio page as page type
+                $page['type'] = MezzioPage::class;
 
                 // Set URL helper if exists
                 if ($urlHelper !== null && ! isset($page['url_helper'])) {

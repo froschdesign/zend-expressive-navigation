@@ -1,48 +1,47 @@
 {
-    "name": "zendframework/zend-expressive-navigation",
-    "description": "Page, middleware and factories for navigations in a zend-expressive application",
-    "homepage": "https://docs.zendframework.com/zend-expressive-navigation/",
+    "name": "mezzio/mezzio-navigation",
+    "description": "Page, middleware and factories for navigations in a mezzio application",
+    "homepage": "https://mezzio.dev",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zend",
-        "zendframework",
-        "zend-expressive-navigation",
-        "zend-expressive"
+        "laminas",
+        "mezzio",
+        "mezzio-navigation"
     ],
     "support": {
-        "docs": "https://docs.zendframework.com/zend-navigation/",
-        "issues": "https://github.com/zendframework/zend-expressive-navigation/issues",
-        "source": "https://github.com/zendframework/zend-expressive-navigation",
-        "rss": "https://github.com/zendframework/zend-expressive-navigation/releases.atom",
-        "slack": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/expressive"
+        "docs": "https://docs.laminas.dev/laminas-navigation/",
+        "issues": "https://github.com/mezzio/mezzio-navigation/issues",
+        "source": "https://github.com/mezzio/mezzio-navigation",
+        "rss": "https://github.com/mezzio/mezzio-navigation/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "require": {
         "php": "^7.1",
         "psr/http-server-middleware": "^1",
-        "zendframework/zend-expressive-helpers": "^5",
-        "zendframework/zend-navigation": "^2.9",
-        "zendframework/zend-stdlib": "^3.2"
+        "mezzio/mezzio-helpers": "^5",
+        "laminas/laminas-navigation": "^2.9",
+        "laminas/laminas-stdlib": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.3.1",
-        "zendframework/zend-coding-standard": "~1",
-        "zendframework/zend-config": "^3.2",
-        "zendframework/zend-expressive-zendrouter": "^3",
-        "zendframework/zend-servicemanager": "^3.3.2"
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-config": "^3.2",
+        "mezzio/mezzio-laminasrouter": "^3",
+        "laminas/laminas-servicemanager": "^3.3.2"
     },
     "suggest": {
-        "zendframework/zend-config": "^3.2, to provide page configuration (optional, as arrays and Traversables are also allowed)",
-        "zendframework/zend-view": "^2.10, to use the navigation view helpers"
+        "laminas/laminas-config": "^3.2, to provide page configuration (optional, as arrays and Traversables are also allowed)",
+        "laminas/laminas-view": "^2.10, to use the navigation view helpers"
     },
     "autoload": {
         "psr-4": {
-            "Zend\\Expressive\\Navigation\\": "src/"
+            "Mezzio\\Navigation\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Expressive\\Navigation\\": "test/"
+            "MezzioTest\\Navigation\\": "test/"
         }
     },
     "config": {
@@ -54,7 +53,7 @@
             "dev-develop": "1.1-dev"
         },
         "zf": {
-            "config-provider": "Zend\\Expressive\\Navigation\\ConfigProvider"
+            "config-provider": "Mezzio\\Navigation\\ConfigProvider"
         }
     },
     "scripts": {

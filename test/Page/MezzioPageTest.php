@@ -1,32 +1,32 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Navigation\Page;
+namespace MezzioTest\Navigation\Page;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\MiddlewareInterface;
-use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Helper\Exception\RuntimeException as UrlHelperRuntimeException;
-use Zend\Expressive\Helper\UrlHelper;
-use Zend\Expressive\Navigation\Page\ExpressivePage;
-use Zend\Expressive\Router\Route;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Expressive\Router\ZendRouter;
-use Zend\Navigation\Exception\InvalidArgumentException;
+use Laminas\Diactoros\ServerRequest;
+use Mezzio\Helper\Exception\RuntimeException as UrlHelperRuntimeException;
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Navigation\Page\MezzioPage;
+use Mezzio\Router\Route;
+use Mezzio\Router\RouteResult;
+use Mezzio\Router\LaminasRouter;
+use Laminas\Navigation\Exception\InvalidArgumentException;
 
-class ExpressivePageTest extends TestCase
+class MezzioPageTest extends TestCase
 {
     /**
-     * @var \Zend\Expressive\Router\Route
+     * @var \Mezzio\Router\Route
      */
     private $route;
 
     /**
-     * @var \Zend\Expressive\Router\RouteResult
+     * @var \Mezzio\Router\RouteResult
      */
     private $routeResult;
 
@@ -42,7 +42,7 @@ class ExpressivePageTest extends TestCase
 
         // Create URL helper
         $this->route = new Route('/foo', $middleware, ['GET'], 'foo');
-        $router      = new ZendRouter();
+        $router      = new LaminasRouter();
         $router->addRoute($this->route);
         $this->urlHelper = new UrlHelper($router);
 
@@ -59,7 +59,7 @@ class ExpressivePageTest extends TestCase
 
     public function testGetHref()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route'        => 'foo',
                 'url_helper'   => $this->urlHelper,
@@ -72,7 +72,7 @@ class ExpressivePageTest extends TestCase
 
     public function testGetHrefWithoutRouteName()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'url_helper'   => $this->urlHelper,
                 'route_result' => $this->routeResult,
@@ -84,7 +84,7 @@ class ExpressivePageTest extends TestCase
 
     public function testGetHrefWithFragment()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route'        => 'foo',
                 'url_helper'   => $this->urlHelper,
@@ -98,7 +98,7 @@ class ExpressivePageTest extends TestCase
 
     public function testGetHrefWithQueryParams()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route'        => 'foo',
                 'url_helper'   => $this->urlHelper,
@@ -116,7 +116,7 @@ class ExpressivePageTest extends TestCase
     public function testGetHrefWithBasePath()
     {
         // Create page
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route'        => 'foo',
                 'url_helper'   => $this->urlHelper,
@@ -135,7 +135,7 @@ class ExpressivePageTest extends TestCase
         $this->expectException(UrlHelperRuntimeException::class);
 
         $failedResultSet = RouteResult::fromRouteFailure(null);
-        $page            = new ExpressivePage(
+        $page            = new MezzioPage(
             [
                 'url_helper'   => $this->urlHelper,
                 'route_result' => $failedResultSet,
@@ -149,7 +149,7 @@ class ExpressivePageTest extends TestCase
     {
         $this->urlHelper->setRouteResult($this->routeResult);
 
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'url_helper' => $this->urlHelper,
             ]
@@ -160,7 +160,7 @@ class ExpressivePageTest extends TestCase
 
     public function testGetHrefSetsHrefCache()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route'        => 'foo',
                 'url_helper'   => $this->urlHelper,
@@ -181,7 +181,7 @@ class ExpressivePageTest extends TestCase
 
     public function testIsActive()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route'        => 'foo',
                 'url_helper'   => $this->urlHelper,
@@ -194,7 +194,7 @@ class ExpressivePageTest extends TestCase
 
     public function testIsActiveWithoutRoute()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'url_helper'   => $this->urlHelper,
                 'route_result' => $this->routeResult,
@@ -207,7 +207,7 @@ class ExpressivePageTest extends TestCase
     public function testSetRoutePerConstructor()
     {
         $name = 'foo';
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route' => $name,
             ]
@@ -219,7 +219,7 @@ class ExpressivePageTest extends TestCase
     public function testSetRoutePerMethod()
     {
         $name = 'foo';
-        $page = new ExpressivePage();
+        $page = new MezzioPage();
         $page->setRoute($name);
 
         $this->assertSame($name, $page->getRoute());
@@ -227,7 +227,7 @@ class ExpressivePageTest extends TestCase
 
     public function testSetRouteToNull()
     {
-        $page = new ExpressivePage();
+        $page = new MezzioPage();
         $page->setRoute(null);
 
         $this->assertNull($page->getRoute());
@@ -237,13 +237,13 @@ class ExpressivePageTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $page = new ExpressivePage();
+        $page = new MezzioPage();
         $page->setRoute('');
     }
 
     public function testSetRouterPerConstructor()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'url_helper' => $this->urlHelper,
             ]
@@ -254,7 +254,7 @@ class ExpressivePageTest extends TestCase
 
     public function testSetUrlPerMethod()
     {
-        $page = new ExpressivePage();
+        $page = new MezzioPage();
         $page->setUrlHelper($this->urlHelper);
 
         $this->assertSame($this->urlHelper, $page->getUrlHelper());
@@ -262,7 +262,7 @@ class ExpressivePageTest extends TestCase
 
     public function testSetRouteResultPerConstructor()
     {
-        $page = new ExpressivePage(
+        $page = new MezzioPage(
             [
                 'route_result' => $this->routeResult,
             ]
@@ -273,7 +273,7 @@ class ExpressivePageTest extends TestCase
 
     public function testSetRouteResultPerMethod()
     {
-        $page = new ExpressivePage();
+        $page = new MezzioPage();
         $page->setRouteResult($this->routeResult);
 
         $this->assertSame($this->routeResult, $page->getRouteResult());
@@ -284,7 +284,7 @@ class ExpressivePageTest extends TestCase
         $params = [
             'foo' => 'bar',
         ];
-        $page   = new ExpressivePage(
+        $page   = new MezzioPage(
             [
                 'params' => $params,
             ]
@@ -298,7 +298,7 @@ class ExpressivePageTest extends TestCase
         $params = [
             'foo' => 'bar',
         ];
-        $page   = new ExpressivePage();
+        $page   = new MezzioPage();
         $page->setParams($params);
 
         $this->assertSame($params, $page->getParams());
@@ -309,7 +309,7 @@ class ExpressivePageTest extends TestCase
         $query = [
             'foo' => 'bar',
         ];
-        $page  = new ExpressivePage(
+        $page  = new MezzioPage(
             [
                 'query' => $query,
             ]
@@ -323,7 +323,7 @@ class ExpressivePageTest extends TestCase
         $query = [
             'foo' => 'bar',
         ];
-        $page  = new ExpressivePage();
+        $page  = new MezzioPage();
         $page->setQuery($query);
 
         $this->assertSame($query, $page->getQuery());

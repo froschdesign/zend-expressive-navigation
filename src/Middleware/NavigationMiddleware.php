@@ -1,21 +1,21 @@
 <?php
 /**
- * @see       https://github.com/zendframework/zend-expressive-navigation for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-navigation/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-navigation for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-navigation/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-navigation/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Navigation\Middleware;
+namespace Mezzio\Navigation\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use RecursiveIteratorIterator;
-use Zend\Expressive\Navigation\Page\ExpressivePage;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Navigation\AbstractContainer;
-use Zend\Navigation\Exception;
+use Mezzio\Navigation\Page\MezzioPage;
+use Mezzio\Router\RouteResult;
+use Laminas\Navigation\AbstractContainer;
+use Laminas\Navigation\Exception;
 
 /**
  * Pipeline middleware for injecting Navigations with a RouteResult.
@@ -64,7 +64,7 @@ class NavigationMiddleware implements MiddlewareInterface
             );
 
             foreach ($iterator as $page) {
-                if ($page instanceof ExpressivePage) {
+                if ($page instanceof MezzioPage) {
                     $page->setRouteResult($routeResult);
                 }
             }
